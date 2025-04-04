@@ -1,5 +1,9 @@
 # Vite Svg Sprite Plugin
 
+[![npm](https://img.shields.io/npm/v/@prof-dev/svg-sprite-plugin.svg)](https://www.npmjs.com/package/@prof-dev/svg-sprite-plugin)
+[![npm downloads](https://img.shields.io/npm/dm/@prof-dev/svg-sprite-plugin.svg)](https://www.npmjs.com/package/@prof-dev/svg-sprite-plugin)
+[![license](https://img.shields.io/npm/l/@prof-dev/svg-sprite-plugin.svg)](./LICENSE)
+
 **A Vite plugin that generates optimized SVG sprite files from directories of SVG icons. Supports multiple input/output configurations and is ideal for scalable icon management in modern front-end applications.**
 
 ---
