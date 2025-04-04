@@ -1,0 +1,13 @@
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24px, auto));
+  justify-items: center;
+  gap: 8px;
+  margin: auto;
+  max-width: 500px;
+}

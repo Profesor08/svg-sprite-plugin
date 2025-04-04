@@ -16,13 +16,13 @@
 ## 📦 Installation
 
 ```bash
-npm install @prof-dev/vite-svg-sprite-plugin --save-dev
+npm install @prof-dev/svg-sprite-plugin --save-dev
 ```
 
 or
 
 ```bash
-yarn add -D @prof-dev/vite-svg-sprite-plugin
+yarn add -D @prof-dev/svg-sprite-plugin
 ```
 
 ---
@@ -32,7 +32,7 @@ yarn add -D @prof-dev/vite-svg-sprite-plugin
 ```ts
 // vite.config.ts
 import { defineConfig } from "vite";
-import { ViteSvgSpritePlugin } from "@prof-dev/vite-svg-sprite-plugin";
+import { ViteSvgSpritePlugin } from "@prof-dev/svg-sprite-plugin";
 
 export default defineConfig({
   plugins: [
