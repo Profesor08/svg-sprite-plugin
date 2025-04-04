@@ -1,3 +1,5 @@
+import convertPath from "@stdlib/utils-convert-path";
+import path from "path";
 import type { Plugin } from "vite";
 import { SvgSprite, SvgSpriteOptions } from "./SvgSprite";
 
@@ -6,9 +8,11 @@ export class ViteSvgSpritePlugin implements Plugin {
   public apply: Plugin["apply"] = "serve";
 
   private sprites: SvgSprite[];
+  private plaginOptions: SvgSpriteOptions[];
 
   constructor(options: SvgSpriteOptions[]) {
-    this.sprites = options.map((options) => new SvgSprite(options));
+    this.plaginOptions = options;
+    this.sprites = this.plaginOptions.map((options) => new SvgSprite(options));
   }
 
   buildStart = () => {
@@ -17,5 +21,17 @@ export class ViteSvgSpritePlugin implements Plugin {
 
   closeBundle = () => {
     this.sprites.forEach((sprite) => sprite.stop());
+  };
+
+  handleHotUpdate: Plugin["handleHotUpdate"] = ({ file, server }) => {
+    this.plaginOptions.forEach(({ output }) => {
+      const filePath = convertPath(path.relative(process.cwd(), file), "posix");
+
+      if (filePath === output) {
+        server.ws.send({
+          type: "full-reload",
+        });
+      }
+    });
   };
 }
