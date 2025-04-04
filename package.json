@@ -14,14 +14,19 @@
   "license": "ISC",
   "dependencies": {
     "@stdlib/utils-convert-path": "^0.2.2",
-    "@types/node": "^22.14.0",
-    "@types/pretty": "^2.0.3",
     "@xmldom/xmldom": "^0.9.8",
     "chokidar": "^4.0.3",
     "fast-glob": "^3.3.3",
-    "pretty": "^2.0.0",
+    "pretty": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/pretty": "^2.0.3",
     "typescript": "^5.8.2",
     "vite": "^4.5.12",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "peerDependencies": {
+    "vite": "^4.0.0"
   }
 }
