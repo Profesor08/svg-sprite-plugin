@@ -4,6 +4,17 @@
   "description": "A Vite plugin that generates optimized SVG sprites from individual SVG icon files",
   "main": "lib/ViteSvgSpritePlugin.js",
   "types": "lib/ViteSvgSpritePlugin.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Profesor08/svg-sprite-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Profesor08/svg-sprite-plugin/issues"
+  },
+  "homepage": "https://github.com/Profesor08/svg-sprite-plugin",
   "scripts": {
     "dev": "vite",
     "build111": "vite build",
