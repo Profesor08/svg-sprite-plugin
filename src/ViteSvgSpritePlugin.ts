@@ -5,7 +5,7 @@ import { SvgSprite, SvgSpriteOptions } from "./SvgSprite";
 
 export class ViteSvgSpritePlugin implements Plugin {
   public name = "vite-svg-sprite-plugin";
-  public apply: Plugin["apply"] = "serve";
+  public apply: NonNullable<Plugin["apply"]> = "serve";
 
   private sprites: SvgSprite[];
   private plaginOptions: SvgSpriteOptions[];
@@ -23,7 +23,10 @@ export class ViteSvgSpritePlugin implements Plugin {
     this.sprites.forEach((sprite) => sprite.stop());
   };
 
-  handleHotUpdate: Plugin["handleHotUpdate"] = ({ file, server }) => {
+  handleHotUpdate: NonNullable<Plugin["handleHotUpdate"]> = ({
+    file,
+    server,
+  }) => {
     this.plaginOptions.forEach(({ output }) => {
       const filePath = convertPath(path.relative(process.cwd(), file), "posix");
 
