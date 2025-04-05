@@ -17,8 +17,10 @@
   "homepage": "https://github.com/Profesor08/svg-sprite-plugin",
   "scripts": {
     "dev": "vite",
-    "build111": "vite build",
+    "lint": "npx eslint",
     "build": "rm -rf ./lib && tsc -p tsconfig.build.json",
+    "prebuild": "npm run lint",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Profesor08",
