@@ -41,7 +41,7 @@ export class SvgSprite {
           stabilityThreshold: 1000,
           pollInterval: 100,
         },
-      }
+      },
     );
 
     this.cache = new Map();
@@ -66,7 +66,7 @@ export class SvgSprite {
       this.watcher.on("all", (eventName, filePath) => {
         const posixFilePath = convertPath(
           path.relative(process.cwd(), filePath),
-          "posix"
+          "posix",
         );
 
         if (posixFilePath.startsWith(input.path) === false) {
@@ -97,7 +97,7 @@ export class SvgSprite {
   };
 
   public stop = () => {
-    this.watcher.close();
+    void this.watcher.close();
     this.cache.clear();
     this.batch.clear();
   };
@@ -119,7 +119,7 @@ export class SvgSprite {
 
     const svg = new DOMParser().parseFromString(
       `<svg xmlns="http://www.w3.org/2000/svg"></svg>`,
-      "text/xml"
+      "text/xml",
     );
 
     for (const symbol of symbols) {
@@ -147,7 +147,7 @@ export class SvgSprite {
 
   private createSymbolFromFile = (
     filePath: string,
-    color?: string
+    color?: string,
   ): SvgSpriteSymbol => {
     const content = fs.readFileSync(filePath).toString();
     const svg = new DOMParser().parseFromString(content, "text/xml");
@@ -156,21 +156,22 @@ export class SvgSprite {
     const width = svg.documentElement?.attributes.getNamedItem("width")?.value;
     const height =
       svg.documentElement?.attributes.getNamedItem("height")?.value;
-    const viewBox = `0 0 ${width} ${height}`;
 
     const symbol = svg.createElementNS("http://www.w3.org/2000/svg", "symbol");
 
     symbol.setAttribute("id", id);
 
-    if (width) {
-      symbol.setAttribute("width", width?.toString());
+    if (width !== undefined) {
+      symbol.setAttribute("width", width.toString());
     }
 
-    if (height) {
-      symbol.setAttribute("height", height?.toString());
+    if (height !== undefined) {
+      symbol.setAttribute("height", height.toString());
     }
 
-    symbol.setAttribute("viewBox", viewBox);
+    if (width !== undefined && height !== undefined) {
+      symbol.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    }
 
     symbol.setAttribute("fill", "none");
 
@@ -186,9 +187,9 @@ export class SvgSprite {
 
   private replaceNodeColor = (node: Node, color?: string): Node => {
     if (color !== undefined && node.nodeType === node.ELEMENT_NODE) {
-      const fill = (node as Element).attributes?.getNamedItem("fill") ?? null;
+      const fill = (node as Element).attributes.getNamedItem("fill") ?? null;
       const stroke =
-        (node as Element).attributes?.getNamedItem("stroke") ?? null;
+        (node as Element).attributes.getNamedItem("stroke") ?? null;
 
       if (fill !== null) {
         fill.value = color;
@@ -198,6 +199,8 @@ export class SvgSprite {
         stroke.value = color;
       }
 
+      // childNodes possibly to be null
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       Array.from(node.childNodes ?? []).forEach((node) => {
         this.replaceNodeColor(node, color);
       });

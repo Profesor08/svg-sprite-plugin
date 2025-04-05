@@ -16,11 +16,15 @@ export class ViteSvgSpritePlugin implements Plugin {
   }
 
   buildStart = () => {
-    this.sprites.forEach((sprite) => sprite.start());
+    this.sprites.forEach((sprite) => {
+      sprite.start();
+    });
   };
 
   closeBundle = () => {
-    this.sprites.forEach((sprite) => sprite.stop());
+    this.sprites.forEach((sprite) => {
+      sprite.stop();
+    });
   };
 
   handleHotUpdate: NonNullable<Plugin["handleHotUpdate"]> = ({
