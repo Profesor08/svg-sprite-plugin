@@ -8,6 +8,8 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(24px, auto));
   justify-items: center;
   gap: 8px;
+  padding: 24px;
   margin: auto;
   max-width: 500px;
+  background-color: rgba(0, 0, 0, 0.2);
 }

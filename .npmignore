@@ -1,0 +1,10 @@
+# Ignore everything by default
+*
+
+# Allow package.json, README, and LICENSE
+!package.json
+!README.md
+!LICENSE
+
+# Allow built output
+!lib/**

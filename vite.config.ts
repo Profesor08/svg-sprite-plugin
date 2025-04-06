@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import pkg from "./package.json";
-import { ViteSvgSpritePlugin } from "./src/ViteSvgSpritePlugin";
+import { ViteSvgSpritePlugin } from "./src/svg-sprite-vite/ViteSvgSpritePlugin";
 
 export default defineConfig({
   server: {
@@ -13,8 +13,11 @@ export default defineConfig({
       {
         input: [
           {
-            path: "src/icons",
+            path: "./icons/plain/",
             color: "currentColor",
+          },
+          {
+            path: "./icons/colored/",
           },
         ],
         output: "public/static/icons.svg",

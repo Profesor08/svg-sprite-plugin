@@ -5,6 +5,14 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
   globalIgnores(["./lib/*"]),
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   {
@@ -19,16 +27,9 @@ export default defineConfig([
   // @ts-expect-error `typescript-eslint` has issues with types
   tseslint.configs.strictTypeChecked,
   {
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
-  {
     rules: {
       "@typescript-eslint/no-unnecessary-boolean-literal-compare": "off",
+      "@typescript-eslint/no-floating-promises": "off",
       "@typescript-eslint/strict-boolean-expressions": "error",
     },
   },
