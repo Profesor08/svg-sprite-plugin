@@ -13,12 +13,6 @@ const compiler = webpack({
 
   entry: "./src/svg-sprite-webpack/index.js",
 
-  watchOptions: {
-    aggregateTimeout: 200,
-    poll: 1000,
-    ignored: /node_modules/,
-  },
-
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
