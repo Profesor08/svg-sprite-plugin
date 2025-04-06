@@ -1,6 +1,6 @@
 {
   "name": "@prof-dev/svg-sprite-plugin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Vite plugin that generates optimized SVG sprites from individual SVG icon files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
