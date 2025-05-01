@@ -24,6 +24,7 @@
   "scripts": {
     "dev:vite": "vite",
     "dev:webpack": "tsx webpack.ts",
+    "dev:rsbuild": "rsbuild dev",
     "lint": "npx eslint",
     "build": "rm -rf ./lib && tsc -p tsconfig.build.json",
     "prebuild": "npm run lint",
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
+    "@rsbuild/core": "^1.3.14",
     "@types/node": "^22.14.0",
     "@types/pretty": "^2.0.3",
     "@types/webpack": "^5.28.5",

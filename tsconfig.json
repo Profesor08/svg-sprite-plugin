@@ -117,6 +117,7 @@
     "src/**/*",
     "./eslint.config.mjs",
     "./vite.config.ts",
+    "./rsbuild.config.ts",
     "webpack.ts"
   ],
   "exclude": ["node_modules/"]
