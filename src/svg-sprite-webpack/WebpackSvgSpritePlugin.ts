@@ -38,6 +38,8 @@ export class WebpackSvgSpritePlugin implements WebpackPluginInstance {
       this.watcher.on("unlink", (filePath: string) => {
         this.svgSpriteManager.action("unlink", filePath);
       });
+
+      this.svgSpriteManager.emit();
     });
 
     compiler.hooks.shutdown.tap(this.name, () => {
