@@ -13,6 +13,14 @@ export interface SvgSpriteOptions {
 export interface SvgSpriteInput {
   readonly path: string;
   readonly color?: string;
+  readonly symbolAttributes?: SvgSpriteSymbolAttributes;
+}
+
+export interface SvgSpriteSymbolAttributes {
+  width?: boolean;
+  height?: boolean;
+  viewBox?: boolean;
+  fill?: boolean;
 }
 
 interface SvgSpriteSymbol {
@@ -113,7 +121,11 @@ export class SvgSprite {
   };
 
   private add = (input: SvgSpriteInput, filePath: string) => {
-    const symbol = createSymbolFromFile(filePath, input.color);
+    const symbol = createSymbolFromFile(
+      filePath,
+      input.color,
+      input.symbolAttributes,
+    );
 
     this.cache.get(input)?.set(filePath, symbol);
   };
@@ -131,6 +143,7 @@ export class SvgSprite {
 const createSymbolFromFile = (
   filePath: string,
   color?: string,
+  attributes?: SvgSpriteSymbolAttributes,
 ): SvgSpriteSymbol => {
   const content = fs.readFileSync(filePath).toString();
   const svg = new DOMParser().parseFromString(content, "text/xml");
@@ -143,19 +156,25 @@ const createSymbolFromFile = (
 
   symbol.setAttribute("id", id);
 
-  if (width !== undefined) {
+  if (attributes?.width === true && width !== undefined) {
     symbol.setAttribute("width", width.toString());
   }
 
-  if (height !== undefined) {
+  if (attributes?.height === true && height !== undefined) {
     symbol.setAttribute("height", height.toString());
   }
 
-  if (width !== undefined && height !== undefined) {
+  if (
+    attributes?.viewBox !== false &&
+    width !== undefined &&
+    height !== undefined
+  ) {
     symbol.setAttribute("viewBox", `0 0 ${width} ${height}`);
   }
 
-  symbol.setAttribute("fill", "none");
+  if (attributes?.fill !== false) {
+    symbol.setAttribute("fill", "none");
+  }
 
   Array.from(svg.documentElement?.childNodes ?? []).forEach((node) => {
     symbol.appendChild(replaceNodeColor(node, color));
