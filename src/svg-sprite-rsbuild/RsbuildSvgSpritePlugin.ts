@@ -4,7 +4,7 @@ import {
   WatchFiles,
   type RsbuildPlugin,
 } from "@rsbuild/core";
-import chokidar, { type FSWatcher } from "chokidar";
+import chokidar from "chokidar";
 import { type SvgSpriteOptions } from "../svg-sprite/SvgSprite";
 import { SvgSpriteManager } from "../svg-sprite/SvgSpriteManager";
 
@@ -17,13 +17,18 @@ export const rsbuildSvgSpritePlugin = (
 class RsbuildSvgSpritePlugin implements RsbuildPlugin {
   public readonly name = "rsbuild:svg-sprite-plugin";
   private readonly options: SvgSpriteOptions[];
-  private readonly svgSpriteManager: SvgSpriteManager;
-  private readonly watcher: FSWatcher;
 
   constructor(options: SvgSpriteOptions[]) {
     this.options = options;
-    this.svgSpriteManager = new SvgSpriteManager(this.options);
-    this.watcher = chokidar.watch(
+  }
+
+  setup(api: RsbuildPluginAPI) {
+    if (api.context.action !== "dev") {
+      return;
+    }
+
+    const svgSpriteManager = new SvgSpriteManager(this.options);
+    const watcher = chokidar.watch(
       this.options
         .map((options) => options.input.map((input) => input.path))
         .flat(),
@@ -34,9 +39,7 @@ class RsbuildSvgSpritePlugin implements RsbuildPlugin {
         },
       },
     );
-  }
 
-  setup(api: RsbuildPluginAPI) {
     api.modifyRsbuildConfig((config) => {
       const devWatchFiles: WatchFiles[] = [config.dev?.watchFiles ?? []].flat();
       const watchFiles: WatchFiles[] = this.options.map((option) => ({
@@ -56,24 +59,24 @@ class RsbuildSvgSpritePlugin implements RsbuildPlugin {
     });
 
     api.onAfterStartDevServer(() => {
-      this.watcher.on("add", (filePath: string) => {
-        this.svgSpriteManager.action("add", filePath);
+      watcher.on("add", (filePath: string) => {
+        svgSpriteManager.action("add", filePath);
       });
 
-      this.watcher.on("change", (filePath: string) => {
-        this.svgSpriteManager.action("change", filePath);
+      watcher.on("change", (filePath: string) => {
+        svgSpriteManager.action("change", filePath);
       });
 
-      this.watcher.on("unlink", (filePath: string) => {
-        this.svgSpriteManager.action("unlink", filePath);
+      watcher.on("unlink", (filePath: string) => {
+        svgSpriteManager.action("unlink", filePath);
       });
 
-      this.svgSpriteManager.emit();
+      svgSpriteManager.emit();
     });
 
     api.onCloseDevServer(() => {
-      this.watcher.close();
-      this.svgSpriteManager.destroy();
+      watcher.close();
+      svgSpriteManager.destroy();
     });
   }
 }
