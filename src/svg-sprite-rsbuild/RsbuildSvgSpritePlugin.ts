@@ -22,7 +22,7 @@ class RsbuildSvgSpritePlugin implements RsbuildPlugin {
     this.options = options;
   }
 
-  setup(api: RsbuildPluginAPI) {
+  setup = (api: RsbuildPluginAPI) => {
     if (api.context.action !== "dev") {
       return;
     }
@@ -78,5 +78,5 @@ class RsbuildSvgSpritePlugin implements RsbuildPlugin {
       watcher.close();
       svgSpriteManager.destroy();
     });
-  }
+  };
 }
