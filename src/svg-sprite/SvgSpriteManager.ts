@@ -8,13 +8,21 @@ export class SvgSpriteManager {
   private batchTimeoutId: NodeJS.Timeout | undefined;
 
   constructor(options: SvgSpriteOptions[]) {
-    this.options = options.map(({ input, output }) => {
+    this.options = options.map(({ input, output, declaration }) => {
       return {
         input: input.map(({ path, color }) => ({
           path: getRelativePosixFilePath(path),
           color,
         })),
         output: getRelativePosixFilePath(output),
+        declaration:
+          declaration === undefined
+            ? undefined
+            : {
+                path: getRelativePosixFilePath(declaration.path),
+                export: declaration.export,
+                namespace: declaration.namespace,
+              },
       };
     });
 

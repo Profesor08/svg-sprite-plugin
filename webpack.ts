@@ -30,6 +30,11 @@ const compiler = webpack({
           },
         ],
         output: "public/static/icons.svg",
+        declaration: {
+          path: "src/icons.d.ts",
+          namespace: "Icons",
+          export: false,
+        },
       },
     ]),
   ],

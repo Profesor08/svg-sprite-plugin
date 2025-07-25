@@ -8,6 +8,22 @@ import { getRelativePosixFilePath } from "../utils/path";
 export interface SvgSpriteOptions {
   readonly input: SvgSpriteInput[];
   readonly output: string;
+  readonly declaration?: SvgSpriteDeclaration;
+}
+
+export interface SvgSpriteDeclaration {
+  /**
+   * Output path
+   */
+  path: string;
+  /**
+   * Type name, default: Icons
+   */
+  namespace: string;
+  /**
+   * Add export from declaration file, default: false
+   */
+  export: boolean;
 }
 
 export interface SvgSpriteInput {
@@ -76,8 +92,7 @@ export class SvgSprite {
           return 0;
         }),
       )
-      .flat()
-      .map(({ symbol }) => symbol);
+      .flat();
 
     const svg = new DOMParser().parseFromString(
       `<svg xmlns="http://www.w3.org/2000/svg"></svg>`,
@@ -85,7 +100,7 @@ export class SvgSprite {
     );
 
     for (const symbol of symbols) {
-      svg.documentElement?.appendChild(symbol);
+      svg.documentElement?.appendChild(symbol.symbol);
     }
 
     const serializedSvg = new XMLSerializer().serializeToString(svg);
@@ -93,6 +108,19 @@ export class SvgSprite {
     const prettiedSvg = pretty(serializedSvg);
 
     fs.writeFileSync(this.options.output, prettiedSvg);
+
+    if (this.options.declaration !== undefined) {
+      const icons = symbols
+        .map((symbol) => symbol.id)
+        .reduce((icons, icon) => icons + "  " + icon + ": string;\n", "");
+
+      const declaration =
+        this.options.declaration.export === true
+          ? `export interface ${this.options.declaration.namespace} {\n${icons}}\n`
+          : `interface ${this.options.declaration.namespace} {\n${icons}}\n`;
+
+      fs.writeFileSync(this.options.declaration.path, declaration);
+    }
   };
 
   public action = (type: "add" | "unlink" | "change", file: string) => {
