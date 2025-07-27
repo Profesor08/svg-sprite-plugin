@@ -13,7 +13,7 @@ export default defineConfig([
       },
     },
   },
-  globalIgnores(["./lib/*"]),
+  globalIgnores(["**/**/lib/*"]),
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   {
     files: ["**/*.{js,mjs,cjs,ts}"],

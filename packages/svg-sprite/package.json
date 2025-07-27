@@ -1,0 +1,31 @@
+{
+	"name": "@prof-dev/svg-sprite",
+	"version": "2.0.0",
+	"description": "Utility to generate SVG sprites from multiple SVG icons",
+	"keywords": [
+		"svg icon",
+		"svg sprite",
+		"svg sprite generator"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"main": "./lib/src/index.js",
+	"types": "./lib/src/index.d.ts",
+	"scripts": {
+		"build": "rm -rf ./lib && npx tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Profesor08",
+	"license": "ISC",
+	"dependencies": {
+		"@stdlib/utils-convert-path": "^0.2.2",
+		"@xmldom/xmldom": "^0.9.8",
+		"fast-glob": "^3.3.3",
+		"pretty": "^2.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^24.1.0",
+		"@types/pretty": "^2.0.3"
+	}
+}

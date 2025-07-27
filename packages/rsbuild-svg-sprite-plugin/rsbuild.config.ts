@@ -1,5 +1,5 @@
-import { defineConfig, WatchFiles } from "@rsbuild/core";
-import { rsbuildSvgSpritePlugin } from "./src/svg-sprite-rsbuild/RsbuildSvgSpritePlugin";
+import { defineConfig, type WatchFiles } from "@rsbuild/core";
+import { rsbuildSvgSpritePlugin } from "./src/rsbuild-plugin";
 
 export default defineConfig(() => {
   return {
@@ -8,11 +8,11 @@ export default defineConfig(() => {
         {
           input: [
             {
-              path: "./icons/plain/",
+              path: "../../icons/plain/",
               color: "currentColor",
             },
             {
-              path: "./icons/colored/",
+              path: "../../icons/colored/",
             },
           ],
           output: "public/static/icons.svg",
@@ -28,13 +28,14 @@ export default defineConfig(() => {
     source: {
       entry: {
         index: {
-          import: "./src/svg-sprite-rsbuild/index.js",
+          import: "../../src/index.ts",
         },
       },
     },
 
     html: {
-      template: "./src/svg-sprite-rsbuild/index.html",
+      title: "rsbuild:svg-sprite-plugin",
+      template: "../../src/index.html",
     },
 
     dev: {
@@ -44,8 +45,9 @@ export default defineConfig(() => {
           "./tsconfig.json",
           "./eslint.config.mjs",
           "./.prettierrc",
-          "./src/svg-sprite/*",
-          "./src/svg-sprite-rsbuild/RsbuildSvgSpritePlugin.ts",
+          "./src/*",
+          "../../src/*",
+          "../../icon/*",
         ],
         type: "reload-server",
       } satisfies WatchFiles,

@@ -1,10 +1,11 @@
 import { getRelativePosixFilePath } from "../utils/path";
-import { SvgSprite, SvgSpriteOptions } from "./SvgSprite";
+import { SvgSpriteChunk } from "./SvgSpriteChunk";
+import { SvgSpriteOptions } from "./types";
 
-export class SvgSpriteManager {
-  private readonly sprites: SvgSprite[];
+export class SvgSprite {
+  private readonly sprites: SvgSpriteChunk[];
   private readonly options: SvgSpriteOptions[];
-  private readonly batch: Set<SvgSprite>;
+  private readonly batch: Set<SvgSpriteChunk>;
   private batchTimeoutId: NodeJS.Timeout | undefined;
 
   constructor(options: SvgSpriteOptions[]) {
@@ -26,7 +27,7 @@ export class SvgSpriteManager {
       };
     });
 
-    this.sprites = this.options.map((options) => new SvgSprite(options));
+    this.sprites = this.options.map((options) => new SvgSpriteChunk(options));
 
     this.batch = new Set();
 

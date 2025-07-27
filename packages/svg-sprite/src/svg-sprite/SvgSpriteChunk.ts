@@ -4,53 +4,15 @@ import fs from "fs";
 import path from "path";
 import pretty from "pretty";
 import { getRelativePosixFilePath } from "../utils/path";
+import {
+  type SvgSpriteInput,
+  type SvgSpriteInputBatch,
+  type SvgSpriteOptions,
+  type SvgSpriteSymbol,
+  type SvgSpriteSymbolAttributes,
+} from "./types";
 
-export interface SvgSpriteOptions {
-  readonly input: SvgSpriteInput[];
-  readonly output: string;
-  readonly declaration?: SvgSpriteDeclaration;
-}
-
-export interface SvgSpriteDeclaration {
-  /**
-   * Output path
-   */
-  path: string;
-  /**
-   * Type name, default: Icons
-   */
-  namespace: string;
-  /**
-   * Add export from declaration file, default: false
-   */
-  export: boolean;
-}
-
-export interface SvgSpriteInput {
-  readonly path: string;
-  readonly color?: string;
-  readonly symbolAttributes?: SvgSpriteSymbolAttributes;
-}
-
-export interface SvgSpriteSymbolAttributes {
-  width?: boolean;
-  height?: boolean;
-  viewBox?: boolean;
-  fill?: boolean;
-}
-
-interface SvgSpriteSymbol {
-  readonly id: string;
-  readonly symbol: Element;
-}
-
-interface SvgSpriteInputBatch {
-  readonly delete: Set<string>;
-  readonly add: Set<string>;
-  readonly change: Set<string>;
-}
-
-export class SvgSprite {
+export class SvgSpriteChunk {
   public readonly options: SvgSpriteOptions;
 
   private readonly cache: Map<SvgSpriteInput, Map<string, SvgSpriteSymbol>>;
@@ -116,8 +78,12 @@ export class SvgSprite {
 
       const declaration =
         this.options.declaration.export === true
-          ? `export interface ${this.options.declaration.namespace} {\n${icons}}\n`
-          : `interface ${this.options.declaration.namespace} {\n${icons}}\n`;
+          ? `export interface ${
+              this.options.declaration.namespace ?? "Icons"
+            } {\n${icons}}\n`
+          : `interface ${
+              this.options.declaration.namespace ?? "Icons"
+            } {\n${icons}}\n`;
 
       fs.writeFileSync(this.options.declaration.path, declaration);
     }
