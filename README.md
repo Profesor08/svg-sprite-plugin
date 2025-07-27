@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/@prof-dev/svg-sprite-plugin.svg)](https://www.npmjs.com/package/@prof-dev/svg-sprite-plugin)
 [![license](https://img.shields.io/npm/l/@prof-dev/svg-sprite-plugin.svg)](./LICENSE)
 
-**A plugin for Vite & Webpack that generates optimized SVG sprite files from directories of SVG icons. Supports multiple input/output configurations and is ideal for scalable icon management in modern front-end applications.**
+**A plugin for Vite, Webpack & Rsbuild that generates optimized SVG sprite files from directories of SVG icons. Supports multiple input/output configurations, TypeScript declarations, and is ideal for scalable icon management in modern front-end applications.**
 
 ---
 
@@ -14,7 +14,8 @@
 - Supports color replacement with any valid CSS color format
 - Automatically watches for changes during development
 - Works well with inlined `<use>` references
-- Available for both Vite and Webpack projects
+- Available for Vite, Webpack, and Rsbuild projects
+- Generate TypeScript declarations for your icons
 
 ---
 
@@ -64,6 +65,11 @@ export default defineConfig({
           },
         ],
         output: "public/static/icons.svg",
+        declaration: {
+          path: "src/icons.d.ts",
+          namespace: "Icons",
+          export: false,
+        },
       },
       {
         input: [
@@ -105,6 +111,11 @@ module.exports = {
           },
         ],
         output: "static/icons.svg",
+        declaration: {
+          path: "src/icons.d.ts",
+          namespace: "Icons",
+          export: false,
+        },
       },
       {
         input: [
@@ -120,6 +131,38 @@ module.exports = {
 };
 ```
 
+### Rsbuild
+
+```ts
+// rsbuild.config.ts
+import { defineConfig } from "@rsbuild/core";
+import { rsbuildSvgSpritePlugin } from "@prof-dev/svg-sprite-plugin";
+
+export default defineConfig({
+  plugins: [
+    rsbuildSvgSpritePlugin([
+      {
+        input: [
+          {
+            path: "./icons/plain/",
+            color: "currentColor",
+          },
+          {
+            path: "./icons/colored/",
+          },
+        ],
+        output: "public/static/icons.svg",
+        declaration: {
+          path: "src/icons.d.ts",
+          namespace: "Icons",
+          export: false,
+        },
+      },
+    ]),
+  ],
+});
+```
+
 ---
 
 ## ⚙️ Plugin Options
@@ -128,7 +171,9 @@ module.exports = {
 
 ### Webpack: `WebpackSvgSpritePlugin(options: SvgSpriteOptions[])`
 
-Both plugins use the same configuration format. Each item in the array generates a separate SVG sprite file.
+### Rsbuild: `rsbuildSvgSpritePlugin(options: SvgSpriteOptions[])`
+
+All plugins use the same configuration format. Each item in the array generates a separate SVG sprite file.
 
 #### `SvgSpriteOptions`
 
@@ -136,13 +181,22 @@ Both plugins use the same configuration format. Each item in the array generates
 | ------ | ------------------ | ------------------------------------- |
 | input  | `SvgSpriteInput[]` | List of input directories and options |
 | output | `string`           | Output path for the generated sprite  |
+| declaration | `SvgSpriteDeclaration?` | TypeScript declaration generation options |
 
 #### `SvgSpriteInput`
 
 | Option | Type      | Description                                              |
 | ------ | --------- | -------------------------------------------------------- |
 | path   | `string`  | Directory containing `.svg` icon files                   |
-| color  | `string`? | (Optional) CSS color value to replace fills in SVG icons |
+| color  | `string?` | (Optional) CSS color value to replace fills in SVG icons |
+
+#### `SvgSpriteDeclaration`
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| path | `string` | ✅ | - | Output path for TypeScript declaration file |
+| namespace | `string` | ❌ | `"Icons"` | Type name for the generated interface |
+| export | `boolean` | ❌ | `false` | Whether to add export statement |
 
 The `color` option supports any valid CSS color format:
 
@@ -154,6 +208,26 @@ The `color` option supports any valid CSS color format:
 - Named colors like `red`, `blue`, `transparent`, etc.
 
 If the `color` option is omitted, the original colors in the SVG files will be preserved.
+
+---
+
+## 📝 TypeScript Declarations
+
+When you enable declaration generation, the plugin creates TypeScript interfaces for your icons:
+
+```ts
+// Generated src/icons.d.ts
+interface Icons {
+  Archive: string;
+  Cloud: string;
+  Cloud_Add: string;
+  File_Add: string;
+  File_Edit: string;
+  // ... all your icons
+}
+```
+
+This provides type safety and autocompletion when referencing your icons in TypeScript code.
 
 ---
 
@@ -201,6 +275,10 @@ The Vite plugin runs in **development mode** (`serve`). It watches for file chan
 ### Webpack Plugin
 
 The Webpack plugin supports **watch mode** and will regenerate sprite files when source SVGs are modified. During production builds, it integrates with Webpack's asset pipeline to output optimized sprite files.
+
+### Rsbuild Plugin
+
+The Rsbuild plugin runs in **development mode** (`dev`). It watches for file changes in the specified directories and regenerates the sprite(s) on-the-fly, integrating with Rsbuild's development server.
 
 ---
 
