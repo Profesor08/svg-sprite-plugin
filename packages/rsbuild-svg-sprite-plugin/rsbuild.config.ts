@@ -1,10 +1,10 @@
 import { defineConfig, type WatchFiles } from "@rsbuild/core";
-import { rsbuildSvgSpritePlugin } from "./src/rsbuild-plugin";
+import { RsbuildSvgSpritePlugin } from "./src/rsbuild-plugin";
 
 const config: ReturnType<typeof defineConfig> = defineConfig(() => {
   return {
     plugins: [
-      rsbuildSvgSpritePlugin([
+      new RsbuildSvgSpritePlugin([
         {
           input: [
             {
