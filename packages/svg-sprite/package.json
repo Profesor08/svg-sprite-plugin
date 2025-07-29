@@ -17,7 +17,8 @@
 	"exports": {
 		".": {
 			"import": "./lib/src/index.js",
-			"require": "./lib/src/index.js"
+			"require": "./lib/src/index.js",
+      "types": "./lib/src/index.d.ts"
 		}
 	},
 	"scripts": {
