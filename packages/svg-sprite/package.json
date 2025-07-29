@@ -1,6 +1,6 @@
 {
 	"name": "@prof-dev/svg-sprite",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Utility to generate SVG sprites from multiple SVG icons",
 	"keywords": [
 		"svg icon",

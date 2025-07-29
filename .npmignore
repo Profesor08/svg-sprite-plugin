@@ -8,3 +8,4 @@
 
 # Allow built output
 !lib/**
+**/**.tsbuildinfo
