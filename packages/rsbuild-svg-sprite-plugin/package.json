@@ -16,6 +16,12 @@
 	},
 	"main": "./lib/src/rsbuild-plugin.js",
 	"types": "./lib/src/rsbuild-plugin.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/src/rsbuild-plugin.js",
+      "require": "./lib/src/rsbuild-plugin.js"
+    }
+  },
 	"scripts": {
 		"dev": "rsbuild dev",
 		"build": "rm -rf ./lib && npx tsc",
