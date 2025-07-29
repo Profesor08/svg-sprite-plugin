@@ -1,6 +1,6 @@
 {
 	"name": "@prof-dev/svg-sprite",
-	"version": "2.0.3",
+	"version": "2.0.4",
 	"author": "Profesor08",
 	"license": "ISC",
 	"description": "Utility to generate SVG sprites from multiple SVG icons",
@@ -14,12 +14,12 @@
 	},
 	"main": "./lib/src/index.js",
 	"types": "./lib/src/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/src/index.js",
-      "require": "./lib/src/index.js"
-    }
-  },
+	"exports": {
+		".": {
+			"import": "./lib/src/index.js",
+			"require": "./lib/src/index.js"
+		}
+	},
 	"scripts": {
 		"build": "rm -rf ./lib && npx tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
