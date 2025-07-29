@@ -22,7 +22,7 @@
 	},
 	"homepage": "https://github.com/Profesor08/svg-sprite-plugin",
 	"scripts": {
-		"dev:vite": "vite",
+		"dev:vite": "npm run dev -w packages/vite-svg-sprite-plugin",
 		"dev:webpack": "tsx webpack.ts",
 		"dev:rsbuild": "npm run dev -w packages/rsbuild-svg-sprite-plugin",
 		"build": "npm run build --workspaces",
@@ -36,15 +36,15 @@
 	},
 	"author": "Profesor08",
 	"license": "ISC",
+	"workspaces": [
+		"packages/svg-sprite",
+		"packages/rsbuild-svg-sprite-plugin",
+		"packages/vite-svg-sprite-plugin"
+	],
 	"devDependencies": {
-		"@eslint/js": "^9.32.0",
 		"eslint": "^9.32.0",
 		"eslint-config-prettier": "^10.1.8",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.38.0"
-	},
-	"workspaces": [
-		"packages/svg-sprite",
-		"packages/rsbuild-svg-sprite-plugin"
-	]
+	}
 }

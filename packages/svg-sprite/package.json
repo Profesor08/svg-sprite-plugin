@@ -16,9 +16,9 @@
 	"types": "./lib/src/index.d.ts",
 	"exports": {
 		".": {
+			"types": "./lib/src/index.d.ts",
 			"import": "./lib/src/index.js",
-			"require": "./lib/src/index.js",
-			"types": "./lib/src/index.d.ts"
+			"require": "./lib/src/index.js"
 		}
 	},
 	"scripts": {

@@ -18,9 +18,9 @@
 	"types": "./lib/src/rsbuild-plugin.d.ts",
 	"exports": {
 		".": {
+			"types": "./lib/src/rsbuild-plugin.d.ts",
 			"import": "./lib/src/rsbuild-plugin.js",
-			"require": "./lib/src/rsbuild-plugin.js",
-			"types": "./lib/src/rsbuild-plugin.d.ts"
+			"require": "./lib/src/rsbuild-plugin.js"
 		}
 	},
 	"scripts": {
