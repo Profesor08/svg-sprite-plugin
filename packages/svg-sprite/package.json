@@ -1,6 +1,8 @@
 {
 	"name": "@prof-dev/svg-sprite",
 	"version": "2.0.2",
+	"author": "Profesor08",
+	"license": "ISC",
 	"description": "Utility to generate SVG sprites from multiple SVG icons",
 	"keywords": [
 		"svg icon",
@@ -16,8 +18,6 @@
 		"build": "rm -rf ./lib && npx tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "Profesor08",
-	"license": "ISC",
 	"dependencies": {
 		"@stdlib/utils-convert-path": "^0.2.2",
 		"@xmldom/xmldom": "^0.9.8",
