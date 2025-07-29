@@ -1,6 +1,6 @@
 {
 	"name": "@prof-dev/rsbuild-svg-sprite-plugin",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"author": "Profesor08",
 	"description": "A Rsbuild plugin that generates SVG sprites from set of SVG icon files",
 	"keywords": [
