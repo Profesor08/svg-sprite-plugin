@@ -8,7 +8,6 @@
 		"svg icon",
 		"svg sprite",
 		"svg sprite generator",
-		"vite plugin",
 		"vite plugin"
 	],
 	"publishConfig": {

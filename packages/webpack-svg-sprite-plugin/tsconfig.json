@@ -3,7 +3,7 @@
 	"compilerOptions": {
     "incremental": true /* Save .tsbuildinfo files to allow for incremental compilation of projects. */,
 		"composite": true /* Enable constraints that allow a TypeScript project to be used with project references. */,
-		"outDir": "lib" /* Specify an output folder for all emitted files. */
+		"outDir": "lib" /* Specify an output folder for all emitted files. */,
 	},
 	"references": [{ "path": "../svg-sprite/" }],
   "include": ["src/"]

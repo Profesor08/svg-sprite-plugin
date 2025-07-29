@@ -2,6 +2,7 @@
 	"name": "@prof-dev/svg-sprite-plugin",
 	"version": "2.0.11",
 	"description": "A Vite plugin that generates optimized SVG sprites from individual SVG icon files",
+	"type": "module",
 	"main": "./lib/index.js",
 	"types": "./lib/index.d.ts",
 	"exports": {
@@ -22,12 +23,14 @@
 	},
 	"homepage": "https://github.com/Profesor08/svg-sprite-plugin",
 	"scripts": {
-		"dev:vite": "npm run dev -w packages/vite-svg-sprite-plugin",
-		"dev:webpack": "tsx webpack.ts",
 		"dev:rsbuild": "npm run dev -w packages/rsbuild-svg-sprite-plugin",
+		"dev:vite": "npm run dev -w packages/vite-svg-sprite-plugin",
+		"dev:webpack": "npm run dev -w packages/webpack-svg-sprite-plugin",
 		"build": "npm run build --workspaces",
 		"build:lib": "npm run build -w packages/svg-sprite",
 		"build:rsbuild": "npm run build -w packages/rsbuild-svg-sprite-plugin",
+		"build:vite": "npm run build -w packages/vite-svg-sprite-plugin",
+		"build:webpack": "npm run build -w packages/webpack-svg-sprite-plugin",
 		"lint": "npx eslint",
 		"version:patch": "npm version patch && npm version patch --workspaces",
 		"prebuild": "npm run lint",
@@ -39,11 +42,13 @@
 	"workspaces": [
 		"packages/svg-sprite",
 		"packages/rsbuild-svg-sprite-plugin",
-		"packages/vite-svg-sprite-plugin"
+		"packages/vite-svg-sprite-plugin",
+		"packages/webpack-svg-sprite-plugin"
 	],
 	"devDependencies": {
 		"eslint": "^9.32.0",
 		"eslint-config-prettier": "^10.1.8",
+		"tsx": "^4.20.3",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.38.0"
 	}
