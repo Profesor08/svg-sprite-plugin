@@ -112,6 +112,7 @@
 	},
 	"references": [
     { "path": "packages/svg-sprite/" },
-    { "path": "packages/rsbuild-svg-sprite-plugin/" }
+    { "path": "packages/rsbuild-svg-sprite-plugin/" },
+    { "path": "packages/vite-svg-sprite-plugin/" }
   ]
 }
