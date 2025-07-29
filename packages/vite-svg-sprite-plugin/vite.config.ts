@@ -1,21 +1,17 @@
 import { defineConfig } from "vite";
-import { ViteSvgSpritePlugin } from "@prof-dev/vite-svg-sprite-plugin";
+import { ViteSvgSpritePlugin } from "./src/vite-plugin";
 
 export default defineConfig({
-  server: {
-    port: 3000,
-  },
-
   plugins: [
     new ViteSvgSpritePlugin([
       {
         input: [
           {
-            path: "./icons/plain/",
+            path: "../../icons/plain/",
             color: "currentColor",
           },
           {
-            path: "./icons/colored/",
+            path: "../../icons/colored/",
           },
         ],
         output: "public/static/icons.svg",
@@ -27,4 +23,8 @@ export default defineConfig({
       },
     ]),
   ],
+
+  server: {
+    port: 3000,
+  },
 });

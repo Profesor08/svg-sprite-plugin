@@ -1,7 +1,7 @@
 import { defineConfig, type WatchFiles } from "@rsbuild/core";
 import { rsbuildSvgSpritePlugin } from "./src/rsbuild-plugin";
 
-export default defineConfig(() => {
+const config: ReturnType<typeof defineConfig> = defineConfig(() => {
   return {
     plugins: [
       rsbuildSvgSpritePlugin([
@@ -28,14 +28,13 @@ export default defineConfig(() => {
     source: {
       entry: {
         index: {
-          import: "../../src/index.ts",
+          import: "./index.ts",
         },
       },
     },
 
     html: {
-      title: "rsbuild:svg-sprite-plugin",
-      template: "../../src/index.html",
+      template: "./index.html",
     },
 
     dev: {
@@ -58,3 +57,5 @@ export default defineConfig(() => {
     },
   };
 });
+
+export default config;
