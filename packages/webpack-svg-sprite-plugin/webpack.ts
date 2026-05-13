@@ -58,10 +58,8 @@ const serverOptions = {
   port: 3000,
 };
 
-if (compiler !== null) {
-  const server = new WebpackDevServer(serverOptions, compiler);
+const server = new WebpackDevServer(serverOptions, compiler);
 
-  server.startCallback(() => {
-    console.log("Dev server is running on http://localhost:3000");
-  });
-}
+server.startCallback(() => {
+  console.log("Dev server is running on http://localhost:3000");
+});
