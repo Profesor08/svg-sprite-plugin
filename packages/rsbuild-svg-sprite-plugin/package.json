@@ -1,0 +1,37 @@
+{
+	"name": "@prof-dev/rsbuild-svg-sprite-plugin",
+	"version": "2.0.12",
+	"author": "Profesor08",
+	"license": "ISC",
+	"description": "A Rsbuild plugin that generates SVG sprites from set of SVG icon files",
+	"keywords": [
+		"svg icon",
+		"svg sprite",
+		"svg sprite generator",
+		"rsbuild plugin",
+		"rspack plugin"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"main": "./lib/src/rsbuild-plugin.js",
+	"types": "./lib/src/rsbuild-plugin.d.ts",
+	"exports": {
+		".": {
+			"types": "./lib/src/rsbuild-plugin.d.ts",
+			"import": "./lib/src/rsbuild-plugin.js",
+			"require": "./lib/src/rsbuild-plugin.js"
+		}
+	},
+	"scripts": {
+		"dev": "rsbuild dev",
+		"build": "rm -rf ./lib && npx tsc",
+		"prepublishOnly": "npm run build",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"@prof-dev/svg-sprite": "^2.0.0",
+		"@rsbuild/core": "^1.4.11",
+		"chokidar": "^4.0.3"
+	}
+}

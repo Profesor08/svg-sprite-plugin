@@ -1,0 +1,35 @@
+{
+	"name": "@prof-dev/vite-svg-sprite-plugin",
+	"version": "2.0.12",
+	"author": "Profesor08",
+	"license": "ISC",
+	"description": "A Vite plugin that generates SVG sprites from set of SVG icon files",
+	"keywords": [
+		"svg icon",
+		"svg sprite",
+		"svg sprite generator",
+		"vite plugin"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"main": "./lib/src/vite-plugin.js",
+	"types": "./lib/src/vite-plugin.d.ts",
+	"exports": {
+		".": {
+			"types": "./lib/src/vite-plugin.d.ts",
+			"import": "./lib/src/vite-plugin.js",
+			"require": "./lib/src/vite-plugin.js"
+		}
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "rm -rf ./lib && npx tsc",
+		"prepublishOnly": "npm run build",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"@prof-dev/svg-sprite": "^2.0.0",
+		"vite": "^7.0.6"
+	}
+}
